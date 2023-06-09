@@ -4,6 +4,7 @@ const Koa = require('koa2'); // 引入koa
 const app = new Koa(); // 创建一个koa实例
 const port = 9000; // 项目的启动端口
 const router = require('./router');
+const errorHandler = require('./utils/error-handler');
 
 /**
  * use()就是调用koa-router中间件
@@ -11,6 +12,7 @@ const router = require('./router');
  * router.allowedMethods() 允许任何请求(get,post,put,delete等等)
 */
 app.use(router.routes(), router.allowedMethods());
+errorHandler(app); // 报错统一处理
 
 // 用koa的中间件
 // app.use(async (ctx, next) => {
